@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gaganpreet Singh - Project Portfolio</title>
+<style>
+  /* Header Dark Theme */
+  :root {
+    --header-bg-start: #0d0d0d;
+    --header-bg-end: #1a1a1a;
+    --header-text-primary: #ffffff;
+    --header-text-accent: #4a7aff;
+    --header-text-secondary: #b0b0b0;
+    --header-shadow-color: rgba(74, 122, 255, 0.2);
+    --scrollbar-thumb: #4a7aff;
+    --scrollbar-track: #dcdcdc;
+  }
+  header {
+    background: linear-gradient(135deg, var(--header-bg-start), var(--header-bg-end));
+    padding: 1.5rem 1rem 1rem; /* Reduced vertical padding */
+    text-align: center;
+    box-shadow: 0 6px 20px var(--header-shadow-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.8rem; /* Slightly reduced margin */
+    border: 3px solid var(--header-text-accent);
+    box-shadow: 0 0 10px var(--header-text-accent);
+    display: inline-block;
+  }
+  header h1 {
+    margin: 0 0 0.3rem;
+    font-weight: 900;
+    font-size: 2.5rem; /* Reduced font size */
+    letter-spacing: 1.5px;
+    color: var(--header-text-primary);
+    text-shadow: 0 0 8px var(--header-text-accent);
+  }
+  header .subtitle {
+    margin: 0 0 0.6rem;
+    font-size: 1.1rem; /* Reduced font size */
+    font-weight: 600;
+    color: var(--header-text-accent);
+  }
+  header div {
+    font-weight: 500;
+    color: var(--header-text-secondary);
+    font-size: 1rem; /* Slightly smaller */
+  }
+  /* ===== Original Portfolio Styles (unchanged) ===== */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0; padding: 0;
+    background-color: #F1F1EC;
+    color: #333;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  h2 {
+    border-left: 5px solid #1e40af;
+    padding-left: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: #1e40af;
+  }
+  .project {
+    margin-bottom: 2rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(30,64,175,0.06), 0 1px 2px rgba(30,64,175,0.09);
+    padding: 1.5rem 1rem;
+  }
+  .slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px #ccd;
+  }
+  /* Slides container with visible horizontal scrollbar */
+  .slides {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding: 10px; /* equal padding on all sides */
+  }
+  /* Custom scrollbar styles for WebKit browsers */
+  .slides::-webkit-scrollbar {
+    height: 10px;
+  }
+  .slides::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 5px;
+  }
+  .slides::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb);
+    border-radius: 5px;
+  }
+  /* Custom scrollbar for Firefox */
+  .slides {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+  /* Transition effect on scroll - images initially hidden and slid right */
+  .slides img {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    will-change: transform, opacity;
+    width: 180px;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 9px;
+    cursor: pointer;
+    user-select: none;
+  }
+  /* Show visible images when in viewport */
+  .slides img.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  .arrow {
+    position: absolute;
+    top: 50%;
+    width: 48px; /* larger for touch */
+    height: 48px;
+    background: rgba(30, 64, 175, 0.7);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 28px;
+    z-index: 10;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+    touch-action: manipulation; /* better tap experience */
+  }
+  .arrow:hover,
+  .arrow:focus {
+    background: #1e40af;
+    outline: none;
+  }
+  .arrow-left { left: 10px; }
+  .arrow-right { right: 10px; }
+
+  /* Technologies Used styling with label and list */
+  .technologies-used .label {
+    color: #1e40af;    /* label color */
+    font-weight: 800;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  .technologies-used .tech-list {
+    color: #555555;    /* list color */
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    font-size: 0.9rem;
+    color: #777;
+    border-top: 1px solid #ddd;
+    margin-top: 2rem;
+  }
+  @media (max-width: 650px) {
+    .container {
+      margin: 1rem;
+      padding: 0 0.5rem; /* Reduced left-right padding */
+    }
+    header h1 {
+      font-size: 2rem;
+    }
+    header .subtitle {
+      font-size: 1rem;
+    }
+    header div {
+      font-size: 0.9rem;
+    }
+    .slides img {
+      width: 120px;
+    }
+    .arrow {
+      display: none; /* Hide arrows on mobile */
+    }
+  }
+  @media (max-width: 400px) {
+    .slides img {
+      width: 100px;
+    }
+    .arrow {
+      width: 36px;
+      height: 36px;
+      font-size: 20px;
+    }
+  }
+  ul { color: #555; }
+  b { color: #222; }
+</style>
+</head>
+<body>
+<header>
+  <img src="previews/profile.jpg" alt="Gaganpreet Singh Profile Picture" class="profile-pic" />
+  <h1>Gaganpreet Singh</h1>
+  <p class="subtitle">Senior iOS and Flutter Developer</p>
+  <!-- <div>Project Portfolio Showcase</div> -->
+</header>
+
+<main class="container">
+
+  <div class="project">
+   
+    <h2><a href="https://apps.apple.com/us/app/onnav-marine/id1557830177" target="_blank">onNAV Marine</a></h2>
+
+ <p>
+      onNAV Marine is an essential tool for any boater. Its next generation Anchor Alert, 3D ENC charts, and user-friendly interface make it the perfect companion for any trip on the water. onNAV Marine has everything you need to stay safe, informed, and entertained on the water.
+    </p>
+    
+    <div class="slider" aria-label="onNAV Marine image slider">
+      <button class="arrow arrow-left" aria-label="Scroll left">&#10094;</button>
+      <div class="slides" tabindex="0">
+        <img src="previews/onNav/onnav1.jpg" alt="onNAV Marine Screenshot 1" />
+        <img src="previews/onNav/onnav2.jpg" alt="onNAV Marine Screenshot 2" />
+        <img src="previews/onNav/onnav3.jpg" alt="onNAV Marine Screenshot 3" />
+        <img src="previews/onNav/onnav4.jpg" alt="onNAV Marine Screenshot 4" />
+        <img src="previews/onNav/onnav9.jpg" alt="onNAV Marine Screenshot 9" />
+        <img src="previews/onNav/onnav10.jpg" alt="onNAV Marine Screenshot 10" />
+        <img src="previews/onNav/preview.gif" alt="onNAV Marine Preview GIF" />
+        <img src="previews/onNav/onnav5.jpg" alt="onNAV Marine Screenshot 5" />
+        <img src="previews/onNav/onnav6.jpg" alt="onNAV Marine Screenshot 6" />
+        <img src="previews/onNav/onnav7.jpg" alt="onNAV Marine Screenshot 7" />
+      </div>
+      <button class="arrow arrow-right" aria-label="Scroll right">&#10095;</button>
+    </div>
+    <p class="technologies-used">
+      <span class="label">Tech stack:</span>
+      <span class="tech-list">Objective-C, Swift, MapBox, AerisWeather API’s, Stormglass API’s,
+           In-App Purchase, Firebase, SQLite database, Alamofire.</span>
+    </p>
+   
+  </div>
+
+  <div class="project">
+    <h2>myWOD (iOS & Android)</h2>
+
+    <p>
+      myWOD is a personalized CrossFit workout tracker built for athletes who want full control over their workout data and progress. Designed to eliminate reliance on gym systems, myWOD empowers users to log, manage, and analyze their WODs (Workouts of the Day) with ease and accuracy—anytime, anywhere.<br />
+      <b>Key Features:</b>
+      <ul>
+        <li>Automatic data backups</li>
+        <li>Search feature and calendar for easy tracking of past WODs</li>
+        <li>Add custom movements and track max weight achievements</li>
+        <li>Graphing to see your progress over time</li>
+        <li>Create your own custom WODs for future use</li>
+        <li>Backup and sync data</li>
+      </ul>
+    </p>
+    
+    <div class="slider" aria-label="myWOD image slider">
+      <button class="arrow arrow-left" aria-label="Scroll left">&#10094;</button>
+      <div class="slides" tabindex="0">
+        <img src="previews/wod/wod1.jpg" alt="myWOD Screenshot 1" />
+        <img src="previews/wod/wod2.jpg" alt="myWOD Screenshot 2" />
+        <img src="previews/wod/wod3.jpg" alt="myWOD Screenshot 3" />
+        <img src="previews/wod/wod4.jpg" alt="myWOD Screenshot 4" />
+        <img src="previews/wod/wod5.jpg" alt="myWOD Screenshot 5" />
+        <img src="previews/wod/wod6.jpg" alt="myWOD Screenshot 6" />
+        <img src="previews/wod/wod7.jpg" alt="myWOD Screenshot 7" />
+      </div>
+      <button class="arrow arrow-right" aria-label="Scroll right">&#10095;</button>
+    </div>
+    <p class="technologies-used">
+      <span class="label">Tech stack:</span>
+      <span class="tech-list">Flutter (Dart), SQLite database, GetX, iCloud storage, Sign-In Google,
+          Sign-In with Apple.</span>
+    </p>
+
+  </div>
+
+  <div class="project">
+   
+
+<h2><a href="https://apps.apple.com/us/app/tactical-nav/id412650650" target="_blank">Tactical NAV</a></h2>
+    
+     <p>
+      TacNav is a military-grade precision targeting app designed for individual Soldiers. It offers offline mapping with full functionality and no cellular signal emission, supports WGS-84 standard coordinates (MGRS, UTM, BNG, USNG), and features tactical drawing, waypoint plotting with military graphics, and a FastLock compass for quick azimuth capture. TacNav allows snapping and saving photos on maps, location sharing via email/text, a one-button night mode, Apple Watch support, and a ‘Go to Grid’ tool for precise planning—all built natively for iOS/iPadOS in austere, contested environments.
+    </p>
+    <div class="slider" aria-label="TacNav image slider">
+      <button class="arrow arrow-left" aria-label="Scroll left">&#10094;</button>
+      <div class="slides" tabindex="0">
+        <img src="previews/tacNav/tn1.PNG" alt="TacNav Screenshot 1" />
+        <img src="previews/tacNav/tn3.PNG" alt="TacNav Screenshot 3" />
+        <img src="previews/tacNav/compass.gif" alt="TacNav GIF Preview" />
+        <img src="previews/tacNav/editor.gif" alt="TacNav GIF Preview" />
+        <img src="previews/tacNav/ruler.gif" alt="TacNav GIF Preview" />
+        <img src="previews/tacNav/tn4.PNG" alt="TacNav Screenshot 4" />
+        <img src="previews/tacNav/tn5.PNG" alt="TacNav Screenshot 5" />
+        <img src="previews/tacNav/tn6.PNG" alt="TacNav Screenshot 6" />
+        <img src="previews/tacNav/tn7.PNG" alt="TacNav Screenshot 7" />
+        <img src="previews/tacNav/tn8.PNG" alt="TacNav Screenshot 8" />
+        <img src="previews/tacNav/tn9.PNG" alt="TacNav Screenshot 9" />
+      </div>
+      <button class="arrow arrow-right" aria-label="Scroll right">&#10095;</button>
+    </div>
+    <p class="technologies-used">
+      <span class="label">Tech stack:</span>
+      <span class="tech-list">Objective-C, Swift, SwiftUI, MapKit, Google Map, In-App Purchase, SQLite database.</span>
+    </p>
+   
+  </div>
+
+  <div class="project">
+
+
+    <h2><a href="https://apps.apple.com/us/app/fit-2-flaunt/id1501799266" target="_blank">Fit2Flaunt</a></h2>
+     <p>
+      Fit2Flaunt is a popular pole dance workout app offering classes for all skill levels. It features video tutorials, workout plans, progress tracking, and community support to help users learn pole dancing moves—from basics to advanced—while staying motivated and having fun.
+    </p>
+    <div class="slider" aria-label="Fit2Flaunt image slider">
+      <button class="arrow arrow-left" aria-label="Scroll left">&#10094;</button>
+      <div class="slides" tabindex="0">
+        <img src="previews/Fit2Flaunt/Fit2Flaunt.PNG" alt="Fit2Flaunt Screenshot 1" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt1.PNG" alt="Fit2Flaunt Screenshot 2" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt2.PNG" alt="Fit2Flaunt Screenshot 3" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt3.PNG" alt="Fit2Flaunt Screenshot 4" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt4.PNG" alt="Fit2Flaunt Screenshot 5" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt5.PNG" alt="Fit2Flaunt Screenshot 6" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt7.PNG" alt="Fit2Flaunt Screenshot 3" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt8.PNG" alt="Fit2Flaunt Screenshot 4" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt9.PNG" alt="Fit2Flaunt Screenshot 5" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt10.PNG" alt="Fit2Flaunt Screenshot 6" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt11.PNG" alt="Fit2Flaunt Screenshot 7" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt12.PNG" alt="Fit2Flaunt Screenshot 7" />
+        <img src="previews/Fit2Flaunt/Fit2Flaunt13.PNG" alt="Fit2Flaunt Screenshot 7" />
+      </div>
+      <button class="arrow arrow-right" aria-label="Scroll right">&#10095;</button>
+    </div>
+    <p class="technologies-used">
+      <span class="label">Tech stack:</span>
+      <span class="tech-list">Swift, Firebase, In-App Purchase, GoogleSignIn, FacebookLogin, Alamofire.</span>
+    </p>
+   
+  </div>
+
+
+
+  <div class="project">
+
+
+        <h2><a href="https://apps.apple.com/in/app/winning-ways-training/id1552675237" target="_blank">Winning Ways Training</a></h2>
+     <p>
+      Winning Ways Training is a proven soccer development program designed to build, refine, and elevate athletic skills.
+Starting in backyards and boxing gyms, this well-researched method offers a complete approach to technical and athletic growth.
+Players at every level—from club to pro—have reached their goals and transformed their game through Winning Ways.
+Join us and become part of the Winning Ways Training story.
+    </p>
+    <div class="slider" aria-label="WW image slider">
+      <button class="arrow arrow-left" aria-label="Scroll left">&#10094;</button>
+      <div class="slides" tabindex="0">
+        <img src="previews/WW/ww1.PNG" alt="ww Screenshot 1" />
+        <img src="previews/WW/ww2.PNG" alt="ww Screenshot 2" />
+         <img src="previews/WW/ww3.PNG" alt="ww Screenshot 3" />
+        <img src="previews/WW/ww4.PNG" alt="ww Screenshot 4" />
+         <img src="previews/WW/ww5.PNG" alt="ww Screenshot 5" />
+        <img src="previews/WW/ww6.PNG" alt="ww Screenshot 6" />
+         <img src="previews/WW/ww7.PNG" alt="ww Screenshot 7" />
+        <img src="previews/WW/ww8.PNG" alt="ww Screenshot 8" />
+         <img src="previews/WW/ww9.PNG" alt="ww Screenshot 9" />
+         <img src="previews/WW/ww10.PNG" alt="ww Screenshot 10" />
+      </div>
+      <button class="arrow arrow-right" aria-label="Scroll right">&#10095;</button>
+    </div>
+    <p class="technologies-used">
+      <span class="label">Tech stack:</span>
+      <span class="tech-list">Swift, UIKit, In-App Purchase, SQLite Database, Firebase URLSession.</span>
+    </p>
+   
+  </div>
+
+  
+
+  <div class="project">
+    <h2>RODEO</h2>
+    <p>
+      Rodeo is a custom-built iOS application designed to simplify the management of traditional bull spectacle games. Whether you're organizing a local event or managing a competitive match, Rodeo makes it easy to handle everything from team creation to score tracking and winner announcements — all from your iPad and iPhone.
+    </p>
+    <div class="slider" aria-label="RODEO image slider">
+      <button class="arrow arrow-left" aria-label="Scroll left">&#10094;</button>
+      <div class="slides" tabindex="0">
+        <img src="previews/rodeo/rodeo1.jpg" alt="RODEO Screenshot 1" />
+        <img src="previews/rodeo/rodeo2.jpg" alt="RODEO Screenshot 2" />
+        <img src="previews/rodeo/rodeo3.jpg" alt="RODEO Screenshot 3" />
+      </div>
+      <button class="arrow arrow-right" aria-label="Scroll right">&#10095;</button>
+    </div>
+    <p class="technologies-used">
+      <span class="label">Tech stack:</span>
+      <span class="tech-list">Swift, UIKit, Core Data, URLSession.</span>
+    </p>
+    
+  </div>
+
+</main>
+
+<footer>
+  &copy; 2025 Gaganpreet Singh.
+</footer>
+
+<script>
+  // Scroll sliders horizontally by visible width on arrow clicks
+  document.querySelectorAll('.slider').forEach(function(slider) {
+    const slides = slider.querySelector('.slides');
+    const prevBtn = slider.querySelector('.arrow-left');
+    const nextBtn = slider.querySelector('.arrow-right');
+
+    prevBtn.addEventListener('click', () => {
+      slides.scrollBy({ left: -slides.clientWidth, behavior: 'smooth' });
+    });
+
+    nextBtn.addEventListener('click', () => {
+      slides.scrollBy({ left: slides.clientWidth, behavior: 'smooth' });
+    });
+
+    // Prevent text/image selection on double tap on arrows
+    prevBtn.addEventListener('touchstart', e => e.preventDefault());
+    nextBtn.addEventListener('touchstart', e => e.preventDefault());
+  });
+
+  // Intersection Observer for smooth fade and slide transitions on images when scrolling
+  document.querySelectorAll('.slider').forEach(slider => {
+    const slides = slider.querySelector('.slides');
+    const imgs = slides.querySelectorAll('img');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { root: slides, threshold: 0.5 });
+
+    imgs.forEach(img => observer.observe(img));
+  });
+</script>
+
+</body>
+</html>
